@@ -1,10 +1,7 @@
 let xp = 0;
-let health = 100;
 let gold = 50;
-let currentWeapon;
 let fighting;
-let monsterHealth
-let inventory = ['stick'];
+let monsterHealth;
 
 const button1 = document.querySelector('#button1');
 const button2 = document.querySelector('#button2');
@@ -17,34 +14,37 @@ const monsterStats = document.querySelector('#monsterStats');
 const monsterNameText = document.querySelector('#monsterNameText');
 const monsterHealthText = document.querySelector('#monsterHealthText');
 
-//Health constants
+//Health variables
 const healAmount = 10;
 const healthPrice = 10;
 const maxHealth = 100;
+let health = 100;
 
-//Weapon constants
+//Weapon variables
 const weapons = [
     {
-        name: "stick",
+        name: "Stick",
         power: 5,
         price: 0
     },
     {
-        name: "dagger",
+        name: "Livid Dagger",
         power: 30,
-        price: 50
+        price: 30
     },
     {
-        name: "giant sword",
+        name: "Giant sword",
         power: 50,
         price: 250
     },
     {
-        name: "dark claymore",
+        name: "Dark Claymore",
         power: 100,
         price: 1500
     }
 ];
+let currentWeapon = 0;
+let maxWeapon = 3;
 
 const locations = [
     {
@@ -56,7 +56,7 @@ const locations = [
     {
         name: "store",
         "button text": [`Buy ${healAmount} health (${healthPrice} gold)`, 'Upgrade weapon (30 gold)', 'Go to town square'],
-        "button functions": [buyHealth, buyWeapon, goTown],
+        "button functions": [buyHealth, upgradeWeapon, goTown],
         text: "You enter the store."
     },
     {
@@ -127,6 +127,20 @@ function buyHealth() {
     healthText.innerText = health;
 }
 
-function buyWeapon() {
-
+function upgradeWeapon() {
+    if (currentWeapon == maxWeapon)
+    {
+        text.innerText = "You already have the best weapon in the lands."
+    }
+    else if (gold < weapons[currentWeapon + 1].price)
+    {
+        text.innerText = "You have insufficient funds."
+    }
+    else
+    {
+        currentWeapon++;
+        text.innerText = `You have upgraded your weapon to a ${weapons[currentWeapon].name}`;
+        gold -= weapons[currentWeapon].price;
+        goldText.innerText = gold;
+    }
 }
