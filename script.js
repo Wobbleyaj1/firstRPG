@@ -238,3 +238,5 @@ function upgradeWeapon() {
         return Math.floor(Math.random() * (max - 1)) + 1;
     }
 // #endregion
+
+// This is a new branch off of origin
