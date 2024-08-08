@@ -144,3 +144,5 @@ function upgradeWeapon() {
         goldText.innerText = gold;
     }
 }
+
+// This is a new branch off of origin
